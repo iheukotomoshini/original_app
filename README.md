@@ -11,7 +11,7 @@
 
 ### Association
 has_many :stocks
-has_many :orders
+has_many :order_users
 
 
 ## stocks テーブル
@@ -25,7 +25,7 @@ has_many :orders
 | user                   | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
-has_one :order
+has_one :order_user
 
 
 ## orders テーブル
@@ -34,5 +34,15 @@ has_one :order
 | purpose             | text       | null: false | 
 | place               | string     | null: false |  
 | piece               | integer    | null: false | 
+### Association
+belongs_to :order_user
 
-
+## purchase_usersテーブル
+| Column                 | Type       |Options|
+| ------                 | ----       |-------|
+| stock                  | references | null: false, foreign_key: true |
+| user                   | references | null: false, foreign_key: true |
+### Association
+belongs_to :stock
+belongs_to :user
+has_one :order
