@@ -37,7 +37,7 @@ has_one :order_user
 ### Association
 belongs_to :order_user
 
-## purchase_usersテーブル
+## order_usersテーブル
 | Column                 | Type       |Options|
 | ------                 | ----       |-------|
 | stock                  | references | null: false, foreign_key: true |
