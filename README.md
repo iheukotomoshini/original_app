@@ -3,7 +3,7 @@
 ## users テーブル
 | Column             | Type   |Options|
 | ------             | ----   |-------|
-| username           | string | null: false |
+| employee_name      | string | null: false |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
 | affiliation        | string | null: false |
