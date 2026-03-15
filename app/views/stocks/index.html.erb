@@ -8,12 +8,13 @@
       </div>
     <% else %>
       <div class="greeting">
-        
+        <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
+        <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
       </div>
     <% end %>
 
-    <%#div class="card__wrapper">
-      <%= render partial: "stock", collection: @stocks %>
+    <div class="card__wrapper">
+      <% render partial: "stock", collection: @stocks %>
     </div>
   </div>
 </main>
