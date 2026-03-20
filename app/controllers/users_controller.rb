@@ -4,5 +4,15 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(user_params)
+    if @user.save
+      redirect_to root_path, notice: "ユーザーが作成されました。"
+    else
+      render :new
+    end
   end
+
+private
+
+def user_params
+  params.require(:user).permit(:employee_name, :email, :password, :password_confirmation, :affiliation, :employee_number)
 end
