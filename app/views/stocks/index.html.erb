@@ -1,0 +1,40 @@
+<main class="main">
+
+<div class="side-bar-header">
+  <div class="header-name">
+    <%#= link_to current_user.name, edit_user_path(current_user) %>
+  </div>
+  <div class="create-room">
+    <%#= link_to "チャットを作成する", new_room_path %>
+  </div>
+</div>
+
+<div class="rooms">
+  <%# current_user.rooms.each do |room| %>
+    <div class="room">
+      <div class="room-name">
+        <%#= link_to room.name, room_messages_path(room) %>
+      </div>
+    </div>
+  <%# end %>
+</div>
+
+  <div class="inner">
+    <% if user_signed_in? %>
+      <div class="greeting"> 
+        こんにちは、 
+        <%= link_to current_user.employee_name, user_path(current_user.id), class: :greeting__link %>
+        さん
+      </div>
+    <% else %>
+      <div class="greeting">
+        <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
+        <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
+      </div>
+    <% end %>
+
+    <div class="card__wrapper">
+      <% render partial: "stock", collection: @stocks %>
+    </div>
+  </div>
+</main>
