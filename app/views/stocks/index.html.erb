@@ -1,40 +1,58 @@
 <main class="main">
 
-<div class="side-bar-header">
-  <div class="header-name">
-    <%#= link_to current_user.name, edit_user_path(current_user) %>
+  <header class="items-sell-header">
+    <%= render "shared/header" %>
+  </header>
+
+      <div class="card__wrapper">
+        <% render partial: "stock", collection: @stocks %>
+      </div>
+    </div>
   </div>
   <div class="create-room">
     <%#= link_to "チャットを作成する", new_room_path %>
   </div>
 </div>
 
-<div class="rooms">
-  <%# current_user.rooms.each do |room| %>
-    <div class="room">
-      <div class="room-name">
-        <%#= link_to room.name, room_messages_path(room) %>
-      </div>
-    </div>
-  <%# end %>
+<div class="room-name">
+  <%= link_to new_stock_path(current_user), class: 'purchase-btn' do %>
+    <span class='purchase-btn-text'>出品する</span>
+  <% end %>
 </div>
 
-  <div class="inner">
-    <% if user_signed_in? %>
-      <div class="greeting"> 
-        こんにちは、 
-        <%= link_to current_user.employee_name, user_path(current_user.id), class: :greeting__link %>
-        さん
-      </div>
-    <% else %>
-      <div class="greeting">
-        <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
-        <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
-      </div>
-    <% end %>
+<div class="room-name">
+  <li>部材一覧</li>
+</div>
 
-    <div class="card__wrapper">
-      <% render partial: "stock", collection: @stocks %>
-    </div>
-  </div>
+<table class="stock-table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>説明</th>
+      <th>カテゴリ</th>
+      <th>価格</th>
+      <th>数量</th>
+      <th>使用</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.title %></td>
+        <td><%= stock.explanation %></td>
+        <td><%= stock.genre.name %></td>
+        <td><%= stock.price %></td>
+        <td><%= stock.piece %></td>
+        <td>
+          <%= link_to "使用する", edit_stock_path(stock), class: "delete-btn" %>
+        </td>
+        <td>
+          <%= link_to "削除", stock_path(stock), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "delete-btn" %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 </main>
