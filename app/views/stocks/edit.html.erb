@@ -1,6 +1,71 @@
-<main class="main">
-
+<div class="items-sell-contents">
   <header class="items-sell-header">
     <%= render "shared/header" %>
   </header>
-</main>
+  <div class="items-sell-main">
+    <h2 class="items-sell-title">登録する部材の情報を入力</h2>
+    <p class="items-sell-sub">※購入した部材を誤りなく記載するようにしてください。</p>
+    <p class="items-sell-sub">※全項目入力必須です。入力していないものがあれば登録できません。</p>
+    <%= form_with model: @stock, local: true do |f| %>
+
+    <%#= render 'devise/shared/error_messages', model: f.object %>
+
+    <div class="new-items">
+      <div class="weight-bold-text">
+        部材名
+
+      </div>
+      <%= f.text_area :title,  class:"items-text", id:"item-name", placeholder:"部材名", maxlength:"40" %>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          部材の説明
+
+        </div>
+        <%= f.text_area :explanation, class:"items-text", id:"item-info", placeholder:"部材の説明(用途等)" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+    </div>
+
+    <div class="items-detail">
+ 
+      <div class="form"> 
+        <div class="weight-bold-text">
+          種類
+
+        </div>
+        <%= f.collection_select(:category_id, @genres, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+      </div>
+    </div>
+
+    <div class="sell-price">
+      <div class="weight-bold-text question-text">
+        <span>購入価格</span>
+        
+      </div>
+      <div>
+        <div class="price-content">
+
+          <span class="sell-yen">¥</span>
+          <%= f.text_field :price, class:"price-text", id:"item-price", placeholder:"価格(消費税含む)" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="items-detail">
+    
+      <div class="form"> 
+        <div class="weight-bold-text">
+          個数
+
+        </div>
+        <%= f.text_field :piece, class:"piece-text", id:"item-piece", placeholder:"個数" %>
+      </div>
+    </div>
+
+
+    <div class="sell-btn-contents">
+      <%= f.submit "登録する" ,class:"sell-btn" %>
+      <%=link_to '編集を中止する', root_path, class:"back-btn" %>
+    </div>
+    <% end %>
+
+</div>
